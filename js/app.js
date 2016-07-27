@@ -49,7 +49,6 @@ computerNumber();
 $(".guess-number").submit(function(event) {
   event.preventDefault();
   var userChoice = $("#userGuess").val(); 
-  /*checkUserChoice();*/
 $("#guessList").append("<li>" + userChoice + "</li>");
   checkGuess(userChoice);
   updateCounter();
