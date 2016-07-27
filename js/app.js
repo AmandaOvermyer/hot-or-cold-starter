@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(document).ready(function(){
 
  /*--- Display information modal box ---*/
@@ -88,3 +89,22 @@ $(".new").click(newGame);
 })
 
 
+=======
+
+$(document).ready(function(){
+	
+	/*--- Display information modal box ---*/
+  	$(".what").click(function(){
+    	$(".overlay").fadeIn(1000);
+
+  	});
+
+  	/*--- Hide information modal box ---*/
+  	$("a.close").click(function(){
+  		$(".overlay").fadeOut(1000);
+  	});
+
+});
+
+
+>>>>>>> f6c17cf8523d290e85a5b33a658c231efae133ac
