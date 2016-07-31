@@ -16,7 +16,7 @@ $(document).ready(function(){
  var guesscount = 0;
 
  function setFocus() {
-  document.getElementById("userGuess").focus();
+  $("#userGuess").focus();
 }
 
 var computerNumber = function(){
@@ -32,36 +32,39 @@ var updateCounter = function() {
   $("#count").text(guesscount);
 }
 
-/*function checkUserChoice(userChoice){
-    if(!userChoice % 1 == 0) {
-      addFeedback ("Please enter a valid number");
-    }
-    if(userChoice < 0 || userChoice > 101){
-      addFeedback ("Please choose a number between 1 and 100");    
-    }
+function checkUserChoice(){
+  var userChoice = $("#userGuess").val(); 
+  var isInt = parseInt(userChoice);
+  if  (!isInt || (userChoice < 1 || userChoice > 100)){
+    addFeedback ("Please choose a number between 1 and 100");
+    $("#userGuess").val("");    
+  } else {
+     $("#guessList").append("<li>" + userChoice + "</li>");
+    checkGuess(userChoice);
+    updateCounter();
+    $("#userGuess").val("");
   }
-*/
+}
 
-window.onload = setFocus();
+
+setFocus();
 
 computerNumber();
 
 $(".guess-number").submit(function(event) {
   event.preventDefault();
-  var userChoice = $("#userGuess").val(); 
-$("#guessList").append("<li>" + userChoice + "</li>");
-  checkGuess(userChoice);
-  updateCounter();
-  $("#userGuess").val("");
+  checkUserChoice();
 }) 
 
 
 
 function checkGuess(userGuess) {
-  distance = Math.abs(secretNumber - userGuess);
+  var distance = Math.abs(secretNumber - userGuess);
   if (distance === 0) {
-    confirm("Wow, you got it right! Click button to start new game.");
-    newGame();
+    var startNewGame = confirm("Wow, you got it right! Click button to start new game.");
+    if (startNewGame){
+      newGame();
+    }
   } else if (distance >= 50) {
     addFeedback ("Ice Cold");
   } else if (distance > 30 && distance < 50){
@@ -74,7 +77,13 @@ function checkGuess(userGuess) {
     addFeedback ("Very Hot");
   }
 }
-
+function newGame2(){
+  guesscount = -1;
+  updateCounter();
+  $("#userGuess").val("");
+  $("#guessList").html("");
+  addFeedback("Make your Guess");
+}
 
 
 function newGame() {
@@ -82,7 +91,7 @@ function newGame() {
   setFocus();
 }
 
-$(".new").click(newGame);
+$(".new").click(newGame2);
 
 })
 
